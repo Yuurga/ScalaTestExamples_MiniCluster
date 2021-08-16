@@ -1,3 +1,11 @@
 # Project exclude paths
 /.gradle/
 /build/
+/.idea/
+/embedded_hdfs/
+/metastore_db/
+/spark-warehouse/
+/gradlew
+/gradlew.bat
+/derby.log
+/gradle/
