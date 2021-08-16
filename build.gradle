@@ -1,0 +1,37 @@
+plugins {
+    id 'java'
+    id 'scala'
+    id 'application'
+}
+
+group 'ru.otus.spark'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation "org.scala-lang:scala-library:$scalaVersion"
+    implementation "org.scala-lang:scala-actors:$scalaVersion"
+
+
+    implementation("org.apache.hadoop:hadoop-client:$hadoopVersion")
+    implementation("org.apache.hadoop:hadoop-minicluster:$hadoopVersion")
+
+    testImplementation "org.scalatest:scalatest_2.11:3.0.4"
+    testImplementation "junit:junit:4.11"
+}
+
+task sparkTest(dependsOn: ['testClasses'], type: JavaExec) {
+    if (System.properties["os.name"].toLowerCase().contains('windows')) {
+        environment 'HADOOP_HOME', hadoopHome
+        environment 'Path', "${hadoopHome}/bin;${System.getenv("Path")}"
+    }
+    mainClass.set( 'org.scalatest.tools.Runner')
+    args = ['-R', 'build/classes/scala/test', '-o']
+    classpath = sourceSets.test.runtimeClasspath
+}
+
+test.dependsOn sparkTest
+

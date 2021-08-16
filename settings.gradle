@@ -1,0 +1,10 @@
+rootProject.name = 'ScalaTestExamples_MiniCluster'
+
+gradle.allprojects {
+    it.version = '1.0.0'
+    it.ext.scalaVersion = '2.11.8'
+    it.ext.sparkVersion = '2.4.0'
+    it.ext.hadoopHome='C:\\Platforms\\windows_libs\\hadoop-3.0.0'
+    it.ext.hadoopVersion='3.0.0'
+}
+
